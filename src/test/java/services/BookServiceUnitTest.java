@@ -1,13 +1,16 @@
 package services;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+
 import entities.Book;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -77,9 +80,51 @@ public class BookServiceUnitTest {
 
         //Then
         assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(0).getTitle()).isEqualTo("servicetest1");
+        assertThat(result.get(1).getTitle()).isEqualTo("servicetest2");
 
+        verify(bookRepository,times(1)).findAll();
 }
 
+     @Test
+    public void getBookByIdTest(){
+        //when
+        Optional<Book> result = bookService.getBookById(1);
 
+        //Then
+         assertTrue(result.isPresent());
+         assertThat(result.get().getTitle()).isEqualTo("servicetest1");
+
+         verify(bookRepository,times(1)).findById(1L);
+}
+    @Test
+    public void createBookTest(){
+
+        //given
+        Book b = new Book("createBookInServiceTest","g1" ,"description...","author...","0","",null,0);
+        b.setId(5L);
+
+        //when
+        bookService.createBook(b);
+
+        //Then
+        assertThat(this.books).contains(b);
+
+        verify(bookRepository,times(1)).save(any());
+}
+
+    @Test
+    public void deleteBookTest(){
+    Book b = this.books.get(0);
+
+    //when
+    bookService.deleteBookById(b.getId());
+
+    //Then
+    assertThat(this.books).doesNotContain(b);
+
+    verify(bookRepository,times(1)).deleteById(any());
+
+}
 
 }
