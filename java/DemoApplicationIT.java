@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = DemoApplication.class)
 
+
 //The following annotation will add a MockMvc instance to the application context that will be injected to our "mvc" field
 @AutoConfigureMockMvc
 public class DemoApplicationIT {

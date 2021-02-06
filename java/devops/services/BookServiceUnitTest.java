@@ -28,7 +28,6 @@ import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
 public class BookServiceUnitTest {
-
     // Creation of our beans that will be injected (BookService in our case)
 
     @TestConfiguration

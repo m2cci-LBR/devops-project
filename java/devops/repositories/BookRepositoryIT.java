@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 //@DataJpaTest for integration test persistance layer
 @DataJpaTest
 
-
 // BookRepository integration test
 public class BookRepositoryIT {
 
