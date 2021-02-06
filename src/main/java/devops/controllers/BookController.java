@@ -1,7 +1,7 @@
-package controllers;
+package devops.controllers;
 
-import entities.Book;
-import exceptions.RessourceNotFoundException;
+import devops.entities.Book;
+import devops.exceptions.RessourceNotFoundException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,7 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import services.IBookService;
+import devops.services.IBookService;
 
 import java.util.List;
 

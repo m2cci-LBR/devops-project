@@ -1,6 +1,6 @@
-package repositories;
+package devops.repositories;
 
-import entities.Book;
+import devops.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IBookRepository extends JpaRepository<Book,Long> {

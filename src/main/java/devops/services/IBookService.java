@@ -1,6 +1,6 @@
-package services;
+package devops.services;
 
-import entities.Book;
+import devops.entities.Book;
 
 import java.util.List;
 import java.util.Optional;

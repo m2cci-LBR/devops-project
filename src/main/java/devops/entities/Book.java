@@ -1,14 +1,10 @@
-package entities;
+package devops.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Book implements Serializable {
 
     @Id
