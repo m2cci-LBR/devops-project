@@ -19,7 +19,6 @@ pipeline {
       bat ' mvn checkstyle:checkstyle'
      }
     }
-   }
   stage('Unit Tests') {
    when {
     anyOf { branch 'main'; branch 'develop' }
@@ -82,6 +81,7 @@ pipeline {
      recordIssues aggregatingResults: true, tools: [javaDoc(), checkStyle(pattern: '**/target/checkstyle-result.xml'), findBugs(pattern: '**/target/findbugsXml.xml', useRankAsPriority: true), pmdParser(pattern: '**/target/pmd.xml')]
     }
    }
+}
 }
 }
 }
