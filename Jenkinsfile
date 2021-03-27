@@ -9,7 +9,6 @@ pipeline {
     checkout scm
    }
   }
-  stage('Build') {
     stage('Compile') {
      steps {
       bat ' mvn clean compile'
@@ -83,7 +82,6 @@ pipeline {
      recordIssues aggregatingResults: true, tools: [javaDoc(), checkStyle(pattern: '**/target/checkstyle-result.xml'), findBugs(pattern: '**/target/findbugsXml.xml', useRankAsPriority: true), pmdParser(pattern: '**/target/pmd.xml')]
     }
    }
-}
 }
 }
 }
