@@ -13,12 +13,12 @@ pipeline {
    parallel {
     stage('Compile') {
      steps {
-      sh ' mvn clean compile'
+      bat ' mvn clean compile'
      }
     }
     stage('CheckStyle') {
      steps {
-      sh ' mvn checkstyle:checkstyle'
+      bat ' mvn checkstyle:checkstyle'
      }
     }
    }
