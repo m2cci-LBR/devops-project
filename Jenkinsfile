@@ -10,7 +10,6 @@ pipeline {
    }
   }
   stage('Build') {
-   parallel {
     stage('Compile') {
      steps {
       bat ' mvn clean compile'
@@ -22,17 +21,9 @@ pipeline {
      }
     }
    }
-  }
   stage('Unit Tests') {
    when {
     anyOf { branch 'main'; branch 'develop' }
-   }
-   agent {
-    docker {
-     image 'maven:3.6.0-jdk-8-alpine'
-     args '-v /root/.m2/repository:/root/.m2/repository'
-     reuseNode true
-    }
    }
    steps {
     sh 'mvn test'
@@ -46,13 +37,6 @@ pipeline {
   stage('Integration Tests') {
    when {
     anyOf { branch 'main'; branch 'develop' }
-   }
-   agent {
-    docker {
-     image 'maven:3.6.0-jdk-8-alpine'
-     args '-v /root/.m2/repository:/root/.m2/repository'
-     reuseNode true
-    }
    }
    steps {
     sh 'mvn verify -Dsurefire.skip=true'
@@ -72,13 +56,6 @@ pipeline {
   stage('Code Quality Analysis') {
    parallel {
     stage('PMD') {
-     agent {
-      docker {
-       image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       reuseNode true
-      }
-     }
      steps {
       sh ' mvn pmd:pmd'
       // using pmd plugin
@@ -87,12 +64,6 @@ pipeline {
     }
     stage('Findbugs') {
      agent {
-      docker {
-       image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       reuseNode true
-      }
-     }
      steps {
       sh ' mvn findbugs:findbugs'
       // using findbugs plugin
@@ -100,13 +71,6 @@ pipeline {
      }
     }
     stage('JavaDoc') {
-     agent {
-      docker {
-       image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       reuseNode true
-      }
-     }
      steps {
       sh ' mvn javadoc:javadoc'
       step([$class: 'JavadocArchiver', javadocDir: './target/site/apidocs', keepAll: 'true'])
