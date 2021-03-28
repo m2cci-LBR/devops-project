@@ -24,7 +24,7 @@ pipeline {
     anyOf { branch 'main'; branch 'develop' }
    }
    steps {
-    sh 'mvn test'
+    bat 'mvn test'
    }
    post {
     always {
@@ -51,11 +51,11 @@ pipeline {
     }
    }
   }
-  stage('Code Quality Analysis') {
+  stages('Code Quality Analysis') {
    parallel {
     stage('PMD') {
      steps {
-      sh ' mvn pmd:pmd'
+      bat ' mvn pmd:pmd'
       // using pmd plugin
       step([$class: 'PmdPublisher', pattern: '**/target/pmd.xml'])
      }
@@ -63,14 +63,14 @@ pipeline {
     stage('Findbugs') {
      agent {
      steps {
-      sh ' mvn findbugs:findbugs'
+      bat ' mvn findbugs:findbugs'
       // using findbugs plugin
       findbugs pattern: '**/target/findbugsXml.xml'
      }
     }
     stage('JavaDoc') {
      steps {
-      sh ' mvn javadoc:javadoc'
+      bat ' mvn javadoc:javadoc'
       step([$class: 'JavadocArchiver', javadocDir: './target/site/apidocs', keepAll: 'true'])
      }
     }
