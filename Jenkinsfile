@@ -50,6 +50,7 @@ pipeline {
      archiveArtifacts 'target/*.war'
     }
    }
+  }
   stage('Code Quality Analysis') {
    parallel {
     stage('PMD') {
@@ -80,7 +81,6 @@ pipeline {
      recordIssues aggregatingResults: true, tools: [javaDoc(), checkStyle(pattern: '**/target/checkstyle-result.xml'), findBugs(pattern: '**/target/findbugsXml.xml', useRankAsPriority: true), pmdParser(pattern: '**/target/pmd.xml')]
     }
    }
-}
 }
 }
 }
