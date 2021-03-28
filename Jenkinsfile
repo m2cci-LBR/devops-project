@@ -61,7 +61,6 @@ pipeline {
      }
     }
     stage('Findbugs') {
-     agent {
      steps {
       bat ' mvn findbugs:findbugs'
       // using findbugs plugin
